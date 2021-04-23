@@ -14,8 +14,8 @@ btnLaunchWhatsApp.innerText = buttonLabel || 'Launch WhatsApp'
 
 // If a phone number was supplied, add it to the URL and show a preview in the UI
 if (whatsAppNumber) {
-  whatsAppURL += whatsAppNumber
-  previewNumberContainer.innerHTML = whatsAppNumber
+    whatsAppURL += cleanPhoneNumber(whatsAppNumber)
+    previewNumberContainer.innerHTML = whatsAppNumber
 // If a phone number wasn't supplied, hide the number preview element from the UI
 } else {
   document.getElementById('preview-number-wrapper').classList.add('hidden')
@@ -33,13 +33,19 @@ if (whatsAppMessage) {
 
 // Define what the "Launch WhatsApp" button does when the field is not marked readonly.
 if (!fieldProperties.READONLY) {
-  var URLEncodedMsg = encodeURI(whatsAppMessage)
   btnLaunchWhatsApp.setAttribute('href', whatsAppURL)
   btnLaunchWhatsApp.onclick = function () {
     saveResponse()
   }
 } else {
-  disableField('This field is disabled')
+  disableField('This field is marked read-only')
+}
+
+// Function to get rid of any invalid characters in the phone number
+function cleanPhoneNumber(str) {
+  // Filter only numbers from the input
+  var cleaned = ('' + str).replace(/\D/g, '')
+  return validatedPhoneNumber = '+' + cleaned
 }
 
 // Define how to store the response
@@ -48,6 +54,7 @@ function saveResponse () {
   setAnswer(successResponse)
 }
 
+// Generic function to disable the field and show a note in the UI about why the field was disabled.
 function disableField (reason) {
   btnLaunchWhatsApp.classList.add('disabled')
   errorMessageContainer.innerHTML = reason
