@@ -1,62 +1,54 @@
-/* global getPluginParameter, fieldProperties, launchIntent, setAnswer */
+/* global getPluginParameter, fieldProperties, setAnswer */
 
-var isAndroid = (document.body.className.indexOf('android-collect') >= 0)
-var smsNumber = getPluginParameter('number')
-var smsMessage = getPluginParameter('message')
+var whatsAppNumber = getPluginParameter('number')
+var whatsAppMessage = getPluginParameter('message')
+var whatsAppURL = 'https://wa.me/'
 var buttonLabel = getPluginParameter('button_label')
-var previewNumberContainer = document.getElementById('sms-preview-number-container')
-var previewMessageContainer = document.getElementById('sms-preview-message-container')
-var btnSendSMS = document.getElementById('btn-send-sms')
-var statusContainer = document.getElementById('status-container')
+var previewNumberContainer = document.getElementById('preview-number-container')
+var previewMessageContainer = document.getElementById('preview-message-container')
+var btnLaunchWhatsApp = document.getElementById('btn-launch-whatsapp')
+var errorMessageContainer = document.getElementById('error-message-container')
 
-// Set up the UI with all the values from the parameters.
-previewNumberContainer.innerHTML = smsNumber
-previewMessageContainer.innerHTML = smsMessage
-btnSendSMS.innerText = buttonLabel || 'Send SMS'
+// Update the button label
+btnLaunchWhatsApp.innerText = buttonLabel || 'Launch WhatsApp'
 
-// Define what the "Send SMS" button does when the field is not marked readonly.
+// If a phone number was supplied, add it to the URL and show a preview in the UI
+if (whatsAppNumber) {
+  whatsAppURL += whatsAppNumber
+  previewNumberContainer.innerHTML = whatsAppNumber
+// If a phone number wasn't supplied, hide the number preview element from the UI
+} else {
+  document.getElementById('preview-number-wrapper').classList.add('hidden')
+}
+
+// If a message was supplied, add it to the URL and show a preview in the UI
+if (whatsAppMessage) {
+  var URLEncodedMsg = encodeURI(whatsAppMessage)
+  whatsAppURL += '?text=' + URLEncodedMsg
+  previewMessageContainer.innerHTML = whatsAppMessage
+// If a message wasn't supplied, hide the message preview element from the UI
+} else {
+  document.getElementById('preview-message-wrapper').classList.add('hidden')
+}
+
+// Define what the "Launch WhatsApp" button does when the field is not marked readonly.
 if (!fieldProperties.READONLY) {
-  if (isAndroid) {
-    btnSendSMS.onclick = function () {
-      launchSMSUsingAndroidIntent()
-    }
-  } else {
-    btnSendSMS.setAttribute('href', 'sms:' + smsNumber + '&body=' + smsMessage)
-    btnSendSMS.onclick = function () {
-      saveResponse('success')
-    }
+  var URLEncodedMsg = encodeURI(whatsAppMessage)
+  btnLaunchWhatsApp.setAttribute('href', whatsAppURL)
+  btnLaunchWhatsApp.onclick = function () {
+    saveResponse()
   }
 } else {
-  btnSendSMS.classList.add('disabled')
+  disableField('This field is disabled')
 }
 
 // Define how to store the response
-function saveResponse (result) {
-  if (result === 'success') {
-    var successResponse = 'SMS created. Recipient: ' + smsNumber + '. Message: "' + smsMessage + '".'
-    setAnswer(successResponse)
-  } else {
-    var failResponse = 'There was an error creating the SMS: ' + result
-    setAnswer(failResponse)
-  }
+function saveResponse () {
+  var successResponse = 'WhatsApp message: Recipient: ' + whatsAppNumber + '. Message: "' + whatsAppMessage + '".'
+  setAnswer(successResponse)
 }
 
-// The following code sets up and launches the Android intent
-function launchSMSUsingAndroidIntent () {
-  // set the parameters for the intent
-  var params = {
-    uri_data: 'smsto:' + smsNumber,
-    sms_body: smsMessage
-  }
-  // Launches the "android.intent.action.SENDTO" intent using the parameters above.
-  launchIntent('android.intent.action.SENDTO', params, function (error, result) {
-    // Something went wrong while launching the intent.
-    if (error) {
-      saveResponse(error)
-      statusContainer.innerHTML = error
-    } else {
-      saveResponse('success')
-      statusContainer.innerHTML = 'Success!'
-    }
-  })
+function disableField (reason) {
+  btnLaunchWhatsApp.classList.add('disabled')
+  errorMessageContainer.innerHTML = reason
 }

@@ -1,12 +1,15 @@
 .message-preview-container {
-	border: 1px solid #047CC2;
+	border: 1px solid #00e676;
 	border-radius: 4px;
-	padding: 1rem;
 	box-sizing: border-box;
 }
-#status-container {
+.message-preview-container>* {
+	margin: 1rem;
+}
+#error-message-container {
 	padding: 6px;
 	text-align: center;
+	color: #ca0505;
 }
 
 /* START global styles */
@@ -46,7 +49,7 @@ a.button {
 	cursor: pointer;
 	padding: .75rem;
 	border-radius: 4px;
-	background-color: #047CC2;
+	background-color: #1c9e8b;
 	color: white;
 	font-weight: bold;
 	width: 100%;
@@ -56,7 +59,7 @@ a.button {
 	text-decoration: none;
 }
 a.button:hover {
-	background-color: #047CC2;
+	background-color: #1ebea5;
 }
 a.button:active {
 	position: relative;
