@@ -14,8 +14,8 @@ btnLaunchWhatsApp.innerText = buttonLabel || 'Launch WhatsApp'
 
 // If a phone number was supplied, add it to the URL and show a preview in the UI
 if (whatsAppNumber) {
-    whatsAppURL += cleanPhoneNumber(whatsAppNumber)
-    previewNumberContainer.innerHTML = whatsAppNumber
+  whatsAppURL += cleanPhoneNumber(whatsAppNumber)
+  previewNumberContainer.innerHTML = whatsAppNumber
 // If a phone number wasn't supplied, hide the number preview element from the UI
 } else {
   document.getElementById('preview-number-wrapper').classList.add('hidden')
@@ -50,7 +50,13 @@ function cleanPhoneNumber(str) {
 
 // Define how to store the response
 function saveResponse () {
-  var successResponse = 'WhatsApp message: Recipient: ' + whatsAppNumber + '. Message: "' + whatsAppMessage + '".'
+  var successResponse = 'WhatsApp:'
+  if (whatsAppNumber) {
+    successResponse += ' recipient=' + whatsAppNumber
+  }
+  if (whatsAppMessage) {
+    successResponse += ' message="' + whatsAppMessage + '"'
+  }
   setAnswer(successResponse)
 }
 
