@@ -12,7 +12,7 @@ This plugin allows you to launch [WhatsApp](https://www.whatsapp.com/) using pre
 
 This field plug-in requires the `text` field type.
 
-A record of the attempts to launch WhatsApp are stored as the field's response in the following format:
+When the green button is pressed, the WhatsApp message information is stored in the field’s response in the following format:
 > WhatsApp: name=`name`; number=`number`; message="`message`"  
 
 *Please note:* this message will be saved when the user clicks the green button. There is no way to verify whether or not WhatsApp was actually launched, a call was made, or a message was sent. Only the parameters that were supplied to the field plug-in will be recorded.
@@ -34,7 +34,7 @@ A record of the attempts to launch WhatsApp are stored as the field's response i
 | `message` (optional) | The body of the text message. |
 | `button_label` (optional) | If you want to override the default button label, "Launch WhatsApp", you can supply your own label with the `button_label` parameter. |
 
-*Note: it is suggested to use values stored in other fields for these parameters. Take a look at the test form to see how this is accomplished.
+*Note:* it is suggested to use values stored in other fields for these parameters. Take a look at the test form to see how this is accomplished.
 
 ## More resources
 
