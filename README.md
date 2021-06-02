@@ -21,7 +21,7 @@ When the green button is pressed, the WhatsApp message information is stored in 
 
 ### Getting started
 
-1. Download the test form [extras/test-form](https://github.com/surveycto/launch-whatsapp/raw/master/extras/Launch%20WhatsApp.xlsx) from this repo and upload it to your SurveyCTO server.
+1. Download the test form [extras/test-form](https://github.com/surveycto/launch-whatsapp/raw/master/extras/sample-form/Launch%20WhatsApp.xlsx) from this repo and upload it to your SurveyCTO server.
 1. Download the [launch-whatsapp.fieldplugin.zip](https://github.com/surveycto/launch-whatsapp/raw/master/launch-whatsapp.fieldplugin.zip) file from this repo, and attach it to the test form on your SurveyCTO server.
 1. Make sure to provide the correct parameters (see below).
 
@@ -39,7 +39,7 @@ When the green button is pressed, the WhatsApp message information is stored in 
 ## More resources
 
 * **Test form**  
-[extras/Launch WhatsApp.xlsx](https://github.com/surveycto/launch-whatsapp/raw/master/extras/Launch%20WhatsApp.xlsx)
+[extras/Launch WhatsApp.xlsx](https://github.com/surveycto/launch-whatsapp/raw/master/extras/sample-form/Launch%20WhatsApp.xlsx)
 * **Developer documentation**  
 Instructions and resources for developing your own field plug-ins.  
 [https://github.com/surveycto/Field-plug-in-resources](https://github.com/surveycto/Field-plug-in-resources)
