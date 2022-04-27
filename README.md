@@ -8,6 +8,19 @@ This plugin allows you to launch [WhatsApp](https://www.whatsapp.com/) using pre
 
 [![Download now](extras/download-button.png)](https://github.com/surveycto/launch-whatsapp/raw/master/launch-whatsapp.fieldplugin.zip)
 
+## Features
+
+* Launch WhatsApp
+* Automatically populate WhatsApp message with recipient phone number and message, ready to be sent
+* Display name of recipient in field plug-in
+* Customize text in button label
+
+### Requirements
+
+Android: Android 7 or up
+
+This field plug-in is only compatible with Android, not iOS nor web forms.
+
 ### Data format
 
 This field plug-in requires the `text` field type.
